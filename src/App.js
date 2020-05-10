@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import theme from 'utils/theme';
 import GlobalStyles from './index.css.js';
 import nextId from "react-id-generator";
+import { useTranslation } from 'react-i18next';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,24 +12,26 @@ import {
 } from "react-router-dom";
 
 
+
 function App() {
   const id1 = nextId();
   const id2 = nextId();
+  const { i18n } = useTranslation();
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
 
       <Router>
-        <Navigation 
+        <Navigation
           items={[
             { content: 'Homepage', to: '/', id: id1 },
             { content: 'budget', to: '/budget', id: id2 }
           ]}
           RightElement={(
             <div>
-              <button>pl</button>
-              <button>en</button>
+              <button onClick={() => i18n.changeLanguage('pl')}>pl</button>
+              <button onClick={() => i18n.changeLanguage('en')}>en</button>
             </div>
           )}
         />
@@ -48,4 +51,12 @@ function App() {
   );
 }
 
-export default App;
+function RootApp() {
+  return (
+    <React.Suspense fallback="loading">
+      <App />
+    </React.Suspense>
+  )
+}
+
+export default RootApp;
