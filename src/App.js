@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Navigation, Wrapper } from 'components';
 import { ThemeProvider } from 'styled-components';
 import theme from 'utils/theme';
@@ -10,8 +10,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-
-
+import { LoadingIndicator } from 'components';
 
 function App() {
   const id1 = nextId();
@@ -19,9 +18,8 @@ function App() {
   const { i18n } = useTranslation();
 
   return (
-    <ThemeProvider theme={theme}>
+    <Fragment>
       <GlobalStyles />
-
       <Router>
         <Navigation
           items={[
@@ -45,17 +43,18 @@ function App() {
             </Route>
           </Switch>
         </Wrapper>
-
       </Router>
-    </ThemeProvider>
+    </Fragment>
   );
 }
 
 function RootApp() {
   return (
-    <React.Suspense fallback="loading">
-      <App />
-    </React.Suspense>
+    <ThemeProvider theme={theme}>
+      <React.Suspense fallback={<LoadingIndicator />}>
+        <App />
+      </React.Suspense>
+    </ThemeProvider>
   )
 }
 
