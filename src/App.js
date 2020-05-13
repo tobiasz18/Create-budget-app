@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Navigation, Wrapper } from 'components';
+import { Navigation, Wrapper, Button } from 'components';
 import { ThemeProvider } from 'styled-components';
 import theme from 'utils/theme';
 import GlobalStyles from './index.css.js';
@@ -16,7 +16,7 @@ function App() {
   const id1 = nextId();
   const id2 = nextId();
   const { i18n } = useTranslation();
-
+  console.log('theme', theme)
   return (
     <Fragment>
       <GlobalStyles />
@@ -28,8 +28,8 @@ function App() {
           ]}
           RightElement={(
             <div>
-              <button onClick={() => i18n.changeLanguage('pl')}>pl</button>
-              <button onClick={() => i18n.changeLanguage('en')}>en</button>
+              <Button variant='regular' onClick={() => i18n.changeLanguage('pl')}>pl</Button>
+              <Button variant='regular' onClick={() => i18n.changeLanguage('en')}>en</Button>
             </div>
           )}
         />
