@@ -11,20 +11,13 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import { connect } from 'react-redux';
-import { fetchBudget, fetchBudgetCategories } from 'data/actions/budget.actions';
-import { useEffect } from 'react';
 
-function App({ budget, fetchBudget, fetchBudgetCategories, state }) {
+import Budget from 'pages/budget';
 
+function App() {
   const id1 = nextId();
   const id2 = nextId();
   const { i18n } = useTranslation();
-  console.log(budget, state, 'state')
-  useEffect(() => {
-    fetchBudget(1)
-    fetchBudgetCategories(1)
-  }, [fetchBudget])
 
   return (
     <Fragment>
@@ -48,7 +41,7 @@ function App({ budget, fetchBudget, fetchBudgetCategories, state }) {
               HOMPAGE
             </Route>
             <Route path="/budget">
-              Budget page
+              <Budget />
             </Route>
           </Switch>
         </Wrapper>
@@ -57,18 +50,11 @@ function App({ budget, fetchBudget, fetchBudgetCategories, state }) {
   );
 }
 
-const ConnectedApp = connect(state => {
-  return {
-    budget: state.budget.budget,
-    state: state
-  }
-}, { fetchBudget, fetchBudgetCategories })(App)
-
 function RootApp() {
   return (
     <ThemeProvider theme={theme}>
       <React.Suspense fallback={<LoadingIndicator />}>
-        <ConnectedApp />
+        <App />
       </React.Suspense>
     </ThemeProvider>
   )
