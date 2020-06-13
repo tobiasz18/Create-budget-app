@@ -26,4 +26,7 @@ module.exports = {
         "ignoreTranspilerName": false
       }
     ],
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+  }
 };

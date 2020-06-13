@@ -4,26 +4,33 @@ import { groupBy } from 'lodash';
 import PropTypes from 'prop-types';
 import { ToggleableList } from 'components';
 import ParentCategory from './ParentCategory';
+import CategoryItem from './CategoryItem';
 
 function BudgetCategoryList({ budgetCategories, allCategories }) {
   const BudgetCategoriesByParent = groupBy(
     budgetCategories,
     item => allCategories.find(category => category.id === item.categoryId).parentCategory.name
   );
-  console.log(budgetCategories, allCategories)
+
   const listItems = Object.entries(BudgetCategoriesByParent).map(([parentName, categories]) => ({
     id: parentName,
     Trigger: ({ onClick }) => (
       <ParentCategory
         name={parentName}
-        onClick={onClick}
+        onClick={() => onClick(parentName)}
       />
-    )
-    /*children: categories.map(category => (
-
-    ))*/
+    ),
+    children: categories.map(budgetedCategory => {
+      const { name } = allCategories.find(category => category.id === budgetedCategory.categoryId);
+      return (
+        <CategoryItem
+          key={budgetedCategory.id}
+          name={name}
+        />
+      )
+    })
   }));
-  console.log(listItems, 'listItems');
+
 
   return (
     <div>
@@ -34,12 +41,10 @@ function BudgetCategoryList({ budgetCategories, allCategories }) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    budgetCategories: state.budget.budgetedCategories,
-    allCategories: state.common.allCategories
-  };
-};
+const mapStateToProps = (state) => ({
+  budgetCategories: state.budget.budgetedCategories,
+  allCategories: state.common.allCategories
+});
 
 BudgetCategoryList.propTypes = {
   allCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
