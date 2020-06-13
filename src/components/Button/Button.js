@@ -9,11 +9,11 @@ function Button({ variant, children, ...props }) {
   const Component = useMemo(() => {
     switch (variant) {
       case 'inline':
-        return InlineButton
+        return InlineButton;
       case 'regular':
-        return RegularButton
+        return RegularButton;
       default:
-        return RegularButton
+        return RegularButton;
     }
   }, [variant]);
 
@@ -31,11 +31,11 @@ function Button({ variant, children, ...props }) {
       <Fragment>
         {content}
       </Fragment>
-    )
+    );
 }
 
 Button.propTypes = {
   variant: PropTypes.oneOf(['inline', 'regular'])
-}
+};
 
 export default Button;

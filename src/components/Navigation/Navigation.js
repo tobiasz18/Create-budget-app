@@ -20,11 +20,11 @@ function Navigation({ items = [], RightElement }) {
         {RightElement}
       </NavigationWrapper>
     </Container>
-  )
+  );
 }
 
 Navigation.propTypes = {
   items: PropTypes.array.isRequired
-}
+};
 
 export default Navigation;

@@ -41,6 +41,6 @@ export default connect(state => {
     commonState: state.common.loadingState,
     budgetState: state.budget.loadingState
 
-  }
+  };
 }, { fetchBudget, fetchBudgetCategories, fetchAllCategories })(Budget)
 

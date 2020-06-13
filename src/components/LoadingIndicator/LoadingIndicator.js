@@ -15,12 +15,12 @@ const flip = keyframes`
   100% {
     transform: rotateY(3600deg);
   }
-`
+`;
 
 const Root = styled.div`
   display: inline-block;
   transform: translateZ(1px);
-`
+`;
 
 const Content = styled.div`
   display: inline-block;
@@ -30,7 +30,7 @@ const Content = styled.div`
   border-radius: 50%;
   background: ${({ theme }) => theme.colors.gray.normal};
   animation: ${flip} 2.4s cubic-bezier(0, 0.2, 0.8, 1); 
-`
+`;
 
 function LoadingIndicator() {
   return (
@@ -38,7 +38,7 @@ function LoadingIndicator() {
       <Content>
       </Content>
     </Root>
-  )
+  );
 }
 
-export default LoadingIndicator
+export default LoadingIndicator;

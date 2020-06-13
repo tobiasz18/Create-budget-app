@@ -12,6 +12,6 @@ const GlobalStyles = createGlobalStyle`
       margin-left: ${({ theme }) => theme.spacing.xs}px;
     }
   }
-`
+`;
 
 export default GlobalStyles;

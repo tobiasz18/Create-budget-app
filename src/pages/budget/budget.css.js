@@ -10,4 +10,4 @@ export const Grid = styled.div`
   section:nth-child(2) {
     flex: 8;
   }
-`
+`;
