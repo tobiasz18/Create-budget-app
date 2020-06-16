@@ -6,7 +6,7 @@ import { ToggleableList } from 'components';
 import ParentCategory from './ParentCategory';
 import CategoryItem from './CategoryItem';
 
-function BudgetCategoryList({ budgetCategories, allCategories }) {
+function BudgetCategoryList({ budgetCategories, allCategories, budget }) {
   const BudgetCategoriesByParent = groupBy(
     budgetCategories,
     item => allCategories.find(category => category.id === item.categoryId).parentCategory.name
@@ -14,10 +14,13 @@ function BudgetCategoryList({ budgetCategories, allCategories }) {
 
   const listItems = Object.entries(BudgetCategoriesByParent).map(([parentName, categories]) => ({
     id: parentName,
+    // eslint-disable-next-line react/display-name
     Trigger: ({ onClick }) => (
       <ParentCategory
         name={parentName}
         onClick={() => onClick(parentName)}
+        categories={categories}
+        transactions={budget.transactions}
       />
     ),
     children: categories.map(budgetedCategory => {
@@ -27,10 +30,9 @@ function BudgetCategoryList({ budgetCategories, allCategories }) {
           key={budgetedCategory.id}
           name={name}
         />
-      )
+      );
     })
   }));
-
 
   return (
     <div>
@@ -43,13 +45,16 @@ function BudgetCategoryList({ budgetCategories, allCategories }) {
 
 const mapStateToProps = (state) => ({
   budgetCategories: state.budget.budgetedCategories,
-  allCategories: state.common.allCategories
+  allCategories: state.common.allCategories,
+  budget: state.budget.budget
 });
 
 BudgetCategoryList.propTypes = {
   allCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
   budgetCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
-}
+  budget: PropTypes.object.isRequired,
+  onClick: PropTypes.func
+};
 
 export default connect(
   mapStateToProps, null

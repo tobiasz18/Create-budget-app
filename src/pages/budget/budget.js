@@ -5,16 +5,16 @@ import { fetchAllCategories } from 'data/actions/common.actions';
 import { Grid } from './budget.css';
 import { LoadingIndicator } from 'components';
 import BudgetCategoryList from 'pages/budget/components/BudgetCategoryList';
-
+import PropTypes from 'prop-types';
 
 function Budget({
-  commonState, budgetState, // data
-  fetchBudget, fetchBudgetCategories, fetchAllCategories // actions
+  commonState, budgetState, 
+  fetchBudget, fetchBudgetCategories, fetchAllCategories 
 }) {
   useEffect(() => {
-    fetchBudget(1)
-    fetchBudgetCategories(1)
-    fetchAllCategories()
+    fetchBudget(1);
+    fetchBudgetCategories(1);
+    fetchAllCategories();
   }, [fetchBudget, fetchBudgetCategories, fetchAllCategories])
 
   const isLoaded = useMemo(() =>
@@ -24,9 +24,9 @@ function Budget({
   );
 
   return (
-    <Grid>   
+    <Grid>
       <section>
-        {isLoaded ? <BudgetCategoryList/> : <LoadingIndicator />}
+        {isLoaded ? <BudgetCategoryList /> : <LoadingIndicator />}
       </section>
       <section>
         {isLoaded ? 'Transaction list' : <LoadingIndicator />}
@@ -35,12 +35,19 @@ function Budget({
   );
 }
 
+Budget.propTypes = {
+  commonState: PropTypes.object,
+  budgetState: PropTypes.object,
+  fetchBudget: PropTypes.func,
+  fetchBudgetCategories: PropTypes.func,
+  fetchAllCategories: PropTypes.func
+};
+
 export default connect(state => {
   return {
     budget: state.budget.budget,
     commonState: state.common.loadingState,
     budgetState: state.budget.loadingState
-
   };
-}, { fetchBudget, fetchBudgetCategories, fetchAllCategories })(Budget)
+}, { fetchBudget, fetchBudgetCategories, fetchAllCategories })(Budget);
 

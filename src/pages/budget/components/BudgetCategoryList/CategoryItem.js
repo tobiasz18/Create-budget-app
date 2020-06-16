@@ -7,11 +7,11 @@ const CategoryItem = ({ name }) => {
     <Root >
       {name}
     </Root>
-  )
+  );
 };
 
 CategoryItem.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default CategoryItem;

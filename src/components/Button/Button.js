@@ -21,7 +21,7 @@ function Button({ variant, children, ...props }) {
     <Component {...props}>
       {children}
     </Component>
-  ), [props, children])
+  ), [props, children]);
 
   return to ? (
     <Link {...props}>
@@ -35,7 +35,9 @@ function Button({ variant, children, ...props }) {
 }
 
 Button.propTypes = {
-  variant: PropTypes.oneOf(['inline', 'regular'])
+  variant: PropTypes.oneOf(['inline', 'regular']),
+  to: PropTypes.string,
+  children: PropTypes.string
 };
 
 export default Button;

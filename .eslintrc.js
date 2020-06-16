@@ -20,6 +20,10 @@ module.exports = {
       semi: "error"
       // or
     },
+
+};
+
+/*
     "react/display-name": [
       "error",
       {
@@ -29,4 +33,5 @@ module.exports = {
     "editor.codeActionsOnSave": {
       "source.fixAll": true
   }
-};
+
+*/ 

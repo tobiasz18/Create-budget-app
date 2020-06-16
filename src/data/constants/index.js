@@ -5,9 +5,9 @@ export const LOADING_STATES = {
   INITIAL: 'INITIAL',
   LOADING: 'LOADING',
   LOADED: 'LOADED',
-  FALIED: 'FALIED',
+  FALIED: 'FALIED'
 };
 
 export default {
-  LOADING_STATES,
+  LOADING_STATES
 };

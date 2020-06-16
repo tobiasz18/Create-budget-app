@@ -24,7 +24,8 @@ function Navigation({ items = [], RightElement }) {
 }
 
 Navigation.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  RightElement: PropTypes.object.isRequired
 };
 
 export default Navigation;

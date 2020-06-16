@@ -3,4 +3,4 @@ import * as common from './common.fetch';
 
 export default {
   budget, common
-}
+};

@@ -11,4 +11,4 @@ export const fetchAllCategories = () => {
     type: ALL_CATEGORIES_GET,
     promise
   };
-}
+};

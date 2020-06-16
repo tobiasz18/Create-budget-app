@@ -7,8 +7,8 @@ import {
 
 const initialState = {
   loadingState: null,
-  allCategories: [],
-}
+  allCategories: []
+};
 
 function common(state = initialState, action) {
   const newLoadingState = { ...state.loadingState };
@@ -19,9 +19,9 @@ function common(state = initialState, action) {
         ...state,
         loadingState: {
           ...state.loadingState,
-          [action.type]: LOADING_STATES.LOADING,
+          [action.type]: LOADING_STATES.LOADING
         }
-      }
+      };
     case ALL_CATEGORIES_GET_SUCCESS:
       delete newLoadingState.ALL_CATEGORIES_GET_REQUEST;
 
@@ -29,15 +29,15 @@ function common(state = initialState, action) {
         ...state,
         allCategories: action.payload,
         loadingState: newLoadingState
-      }
+      };
     case ALL_CATEGORIES_GET_FAILURE:
-      delete newLoadingState.ALL_CATEGORIES_GET_REQUEST
+      delete newLoadingState.ALL_CATEGORIES_GET_REQUEST;
       
       return {
         ...state,
         allCategories: {},
         loadingState: newLoadingState
-      }  
+      }; 
     default:
       return state;
   }

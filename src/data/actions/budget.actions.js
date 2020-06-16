@@ -1,6 +1,6 @@
 import {
   BUDGET_GET,
-  BUDGET_CATEGORIES_GET,
+  BUDGET_CATEGORIES_GET
 } from 'data/constants';
 
 import API from 'data/fetch';
@@ -11,8 +11,8 @@ export const fetchBudget = id => {
   return {
     type: BUDGET_GET,
     promise
-  }
-}
+  };
+};
 
 export const fetchBudgetCategories = id => {
   const promise = API.budget.fetchBudgetedCategories(id);
@@ -20,5 +20,5 @@ export const fetchBudgetCategories = id => {
   return {
     type: BUDGET_CATEGORIES_GET,
     promise
-  }
-}
+  };
+};

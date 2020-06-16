@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Item = ({ item, onClickHandler, isActive }) => (
   <div>
@@ -24,5 +25,15 @@ function ToggleableList({ items }) {
     </Fragment>
   );
 }
+
+ToggleableList.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
+Item.propTypes = {
+  item: PropTypes.object.isRequired,
+  onClickHandler: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired
+};
 
 export default ToggleableList;

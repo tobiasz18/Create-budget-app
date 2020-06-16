@@ -12,8 +12,8 @@ import {
 const initialState = {
   loadingState: null,
   budget: {},
-  budgetedCategories: [],
-}
+  budgetedCategories: []
+};
 
 function budget(state = initialState, action) {
   const newLoadingState = { ...state.loadingState };
@@ -24,9 +24,9 @@ function budget(state = initialState, action) {
         ...state,
         loadingState: {
           ...state.loadingState,
-          [action.type]: LOADING_STATES.LOADING,
+          [action.type]: LOADING_STATES.LOADING
         }
-      }
+      };
 
     case BUDGET_GET_SUCCESS:
       delete newLoadingState.BUDGET_GET_REQUEST;
@@ -34,7 +34,7 @@ function budget(state = initialState, action) {
         ...state,
         budget: action.payload,
         loadingState: newLoadingState
-      }
+      };
 
     case BUDGET_GET_FAILURE:
       delete newLoadingState.BUDGET_GET_REQUEST;
@@ -42,16 +42,16 @@ function budget(state = initialState, action) {
         ...state,
         budget: {},
         loadingState: newLoadingState
-      }
+      };
 
     case BUDGET_CATEGORIES_GET_REQUEST:
       return {
         ...state,
         loadingState: {
           ...state.loadingState,
-          [action.type]: LOADING_STATES.LOADING,
+          [action.type]: LOADING_STATES.LOADING
         }
-      }
+      };
 
     case BUDGET_CATEGORIES_GET_SUCCESS:
       delete newLoadingState.BUDGET_CATEGORIES_GET_REQUEST;
@@ -59,7 +59,7 @@ function budget(state = initialState, action) {
         ...state,
         budgetedCategories: action.payload,
         loadingState: newLoadingState
-      }
+      };
 
     case BUDGET_CATEGORIES_GET_FAILURE:
       delete newLoadingState.BUDGET_CATEGORIES_GET_REQUEST;
@@ -67,7 +67,7 @@ function budget(state = initialState, action) {
         ...state,
         budgetedCategories: {},
         loadingState: newLoadingState
-      }
+      };
       
     default:
       return state;

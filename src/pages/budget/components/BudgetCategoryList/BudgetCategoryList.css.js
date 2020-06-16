@@ -9,8 +9,13 @@ export const Category = styled.div`
 
 export const ParentCategory = styled(Category)`
   background: ${({ theme }) => theme.colors.gray.normal};
-`
+`;
 
 export const CategoryItem = styled(Category)`
   background: ${({ theme }) => theme.colors.gray.light};
-`
+`;
+
+export const CategoryAmount = styled.span`
+  font-weight: 700;
+  color: ${({ theme, negative }) =>  negative ? theme.colors.red.normal : theme.colors.green.normal}
+`;
