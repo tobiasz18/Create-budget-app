@@ -5,6 +5,7 @@ export const Category = styled.div`
   padding: ${({ theme }) => theme.spacing.xs}px;
   display: flex;
   justify-content: space-between;
+  margin: 1px;
 `;
 
 export const ParentCategory = styled(Category)`
