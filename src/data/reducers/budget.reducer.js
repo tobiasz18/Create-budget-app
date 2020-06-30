@@ -6,13 +6,16 @@ import {
 
   BUDGET_CATEGORIES_GET_FAILURE,
   BUDGET_CATEGORIES_GET_REQUEST,
-  BUDGET_CATEGORIES_GET_SUCCESS
+  BUDGET_CATEGORIES_GET_SUCCESS,
+
+  SET_SELECTED_PARENT_CATEGORY_ID
 } from 'data/constants';
 
 const initialState = {
   loadingState: null,
   budget: {},
-  budgetedCategories: []
+  budgetedCategories: [],
+  selectedParentCategoryId: undefined
 };
 
 function budget(state = initialState, action) {
@@ -69,6 +72,12 @@ function budget(state = initialState, action) {
         loadingState: newLoadingState
       };
       
+     case SET_SELECTED_PARENT_CATEGORY_ID:
+       return {
+         ...state,
+         selectedParentCategoryId: action.payload
+       }; 
+
     default:
       return state;
   }

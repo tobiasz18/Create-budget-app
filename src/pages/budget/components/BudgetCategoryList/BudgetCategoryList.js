@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
+import 'styled-components/macro';
 import { groupBy } from 'lodash';
 import PropTypes from 'prop-types';
 import { ToggleableList } from 'components';
+
 import ParentCategory from './ParentCategory';
 import CategoryItem from './CategoryItem';
 import { useTranslation } from 'react-i18next';
-import 'styled-components/macro';
+import { selectParentCategory } from 'data/actions/budget.actions';
 
-function BudgetCategoryList({ budgetedCategories, allCategories, budget }) {
+function BudgetCategoryList({
+  budgetedCategories, allCategories, budget,
+  selectParentCategory
+}) {
   const { t } = useTranslation();
+
   const BudgetCategoriesByParent = groupBy(
     budgetedCategories,
     item => allCategories.find(category => category.id === item.categoryId).parentCategory.name
   );
+
   const listItems = Object.entries(BudgetCategoriesByParent).map(([parentName, categories]) => ({
     id: parentName,
     // eslint-disable-next-line react/display-name
     Trigger: ({ onClick }) => (
       <ParentCategory
         name={parentName}
-        onClick={() => onClick(parentName)}
+        onClick={() => {
+          selectParentCategory(parentName);
+          onClick(parentName);
+        }}
         categories={categories}
         transactions={budget.transactions}
       />
@@ -57,20 +67,30 @@ function BudgetCategoryList({ budgetedCategories, allCategories, budget }) {
   const notBudgetedExpenses = notBudgetedTransaction.reduce((acc, transaction) => acc + transaction.amount, 0);
   const availableForRestCategories = budget.totalAmount - amountTaken - notBudgetedExpenses;
 
+  const handleClickParentCategoryRef = useRef(null);  
+  const handleClearCategorySelect = () => {
+    selectParentCategory();
+    handleClickParentCategoryRef.current();
+  };
+  const handleClearSelectOtherCategories = () => {
+    selectParentCategory(null);
+    handleClickParentCategoryRef.current();
+  };
+
   return (
     <div>
-      <div
-        css={`
-             border-bottom: 5px solid ${({ theme }) => theme.colors.gray.light}
-        `}
+      <div css={`border-bottom: 5px solid ${({ theme }) => 
+        theme.colors.gray.light}`}
       >
         <ParentCategory
           name={budget.name}
           amount={restToSpent}
+          onClick={handleClearCategorySelect}
         />
       </div>
       <ToggleableList
         items={listItems}
+        onClickRef={handleClickParentCategoryRef}
       />
       <div
         css={`
@@ -80,6 +100,7 @@ function BudgetCategoryList({ budgetedCategories, allCategories, budget }) {
         <ParentCategory
           name={t('Other categories')}
           amount={availableForRestCategories}
+          onClick={handleClearSelectOtherCategories}
         />
       </div>
     </div>
@@ -96,9 +117,10 @@ BudgetCategoryList.propTypes = {
   allCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
   budgetedCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
   budget: PropTypes.object.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  selectParentCategory: PropTypes.func
 };
 
 export default connect(
-  mapStateToProps, null
+  mapStateToProps, { selectParentCategory }
 )(BudgetCategoryList);
