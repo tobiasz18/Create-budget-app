@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { List, ListItem } from './BudgetTransactionList.css';
 import { connect } from 'react-redux';
 import { groupBy } from 'lodash';
 import PropTypes from 'prop-types';
 import { formatCurrent, formatData } from 'utils';
 
-function BudgetTransactionList({ transactions, allCategories, selectedParentCategoryId, budgetedCategories }) {
-  const filteredTransactionsBySelectedParentCategory = (() => {
-    if(typeof selectedParentCategoryId === 'undefined') return transactions;
 
-    if(selectedParentCategoryId === null) {
+function BudgetTransactionList({ transactions, allCategories, selectedParentCategoryId, budgetedCategories }) {
+  const filteredTransactionsBySelectedParentCategory = useMemo(() => {
+    if (typeof selectedParentCategoryId === 'undefined') return transactions;
+
+    if (selectedParentCategoryId === null) {
       return transactions.filter(transaction => {
         const hasBudgetedCategory = budgetedCategories.some(budgetedCategory => budgetedCategory.categoryId === transaction.categoryId);
 
@@ -27,12 +28,13 @@ function BudgetTransactionList({ transactions, allCategories, selectedParentCate
         return false;
       }
     });
-  })();
+  }, [selectedParentCategoryId, transactions, allCategories, budgetedCategories]);
 
-  const groupedTransactions = groupBy(
-    filteredTransactionsBySelectedParentCategory,
-    transaction => new Date(transaction.date).getUTCDate()
-  );
+  const groupedTransactions = useMemo(() =>
+    groupBy(
+      filteredTransactionsBySelectedParentCategory,
+      transaction => new Date(transaction.date).getUTCDate()
+    ), [filteredTransactionsBySelectedParentCategory]);
 
   return (
     <List>
