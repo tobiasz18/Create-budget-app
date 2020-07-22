@@ -3,7 +3,6 @@ import { CategoryItem as Root, CategoryAmount } from './BudgetCategoryList.css';
 import PropTypes from 'prop-types';
 import { formatCurrent } from 'utils';
 
-
 const CategoryItem = ({ name, item, transactions }) => {
   const categoryTransactions = transactions
     .filter(transaction => transaction.categoryId === item.id);

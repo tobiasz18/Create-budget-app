@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { RegularButton, InlineButton } from './Button.css';
 import { Link } from 'react-router-dom';
 
-function Button({ variant, children, ...props }) {
+const Button = ({ variant, children, ...props }) => {
   const { to } = props;
 
   const Component = useMemo(() => {
@@ -32,7 +32,7 @@ function Button({ variant, children, ...props }) {
         {content}
       </Fragment>
     );
-}
+};
 
 Button.propTypes = {
   variant: PropTypes.oneOf(['inline', 'regular']),

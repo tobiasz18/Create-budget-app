@@ -9,7 +9,7 @@ const Item = ({ item, onClickHandler, isActive }) => (
   </div>
 );
 
-function ToggleableList({ items, onClickRef }) {
+const ToggleableList = ({ items, onClickRef }) => {
   const [selectedItem, setSelectedItem] = useState();
   useEffect(() => {
     onClickRef.current = setSelectedItem;
@@ -27,7 +27,7 @@ function ToggleableList({ items, onClickRef }) {
       ))}
     </Fragment>
   );
-}
+};
 
 ToggleableList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,

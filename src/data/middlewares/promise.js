@@ -22,7 +22,7 @@ export default function promiseMiddleware() {
           });
         })
         .catch(error => {
-          next({ type: FAILURE, error, ...rest })
+          next({ type: FAILURE, error, ...rest });
         });
     };
   };

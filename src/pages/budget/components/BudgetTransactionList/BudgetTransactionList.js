@@ -5,8 +5,7 @@ import { groupBy } from 'lodash';
 import PropTypes from 'prop-types';
 import { formatCurrent, formatData } from 'utils';
 
-
-function BudgetTransactionList({ transactions, allCategories, selectedParentCategoryId, budgetedCategories }) {
+const BudgetTransactionList = ({ transactions, allCategories, selectedParentCategoryId, budgetedCategories }) => {
   const filteredTransactionsBySelectedParentCategory = useMemo(() => {
     if (typeof selectedParentCategoryId === 'undefined') return transactions;
 
@@ -56,7 +55,7 @@ function BudgetTransactionList({ transactions, allCategories, selectedParentCate
       ))}
     </List>
   );
-}
+};
 
 BudgetTransactionList.propTypes = {
   transactions: PropTypes.array.isRequired,

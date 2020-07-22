@@ -50,14 +50,14 @@ function App() {
   );
 }
 
-function RootApp() {
+const RootApp = () => {
   return (
     <ThemeProvider theme={theme}>
       <React.Suspense fallback={<LoadingIndicator />}>
         <App />
       </React.Suspense>
     </ThemeProvider>
-  )
-}
+  );
+};
 
 export default RootApp;

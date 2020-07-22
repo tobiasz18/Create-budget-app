@@ -10,10 +10,10 @@ import CategoryItem from './CategoryItem';
 import { useTranslation } from 'react-i18next';
 import { selectParentCategory } from 'data/actions/budget.actions';
 
-function BudgetCategoryList({
+const BudgetCategoryList = ({
   budgetedCategories, allCategories, budget,
   selectParentCategory
-}) {
+}) => {
   const { t } = useTranslation();
 
   const BudgetCategoriesByParent = useMemo(() =>
@@ -61,8 +61,8 @@ function BudgetCategoryList({
     [budget.totalAmount, totalSpent]
   );
 
-  const amountTaken = useMemo(() => budgetedCategories.
-    reduce((acc, budgetedCategory) => {
+  const amountTaken = useMemo(() => budgetedCategories
+    .reduce((acc, budgetedCategory) => {
       const categoryTransactions = budget.transactions
         .filter(transaction => transaction.categoryId === budgetedCategory.id);
       const categoryExpenses = categoryTransactions
@@ -79,8 +79,8 @@ function BudgetCategoryList({
         .find(budgetedCategory => budgetedCategory.id === transaction.categoryId);
     }), [budget.transactions, budgetedCategories]);
 
-  const notBudgetedExpenses = useMemo(() => notBudgetedTransaction.
-    reduce((acc, transaction) => acc + transaction.amount, 0),
+  const notBudgetedExpenses = useMemo(() => notBudgetedTransaction
+    .reduce((acc, transaction) => acc + transaction.amount, 0),
     [notBudgetedTransaction]
   );
   const availableForRestCategories = useMemo(() =>
@@ -128,7 +128,7 @@ function BudgetCategoryList({
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = state => ({
   budgetedCategories: state.budget.budgetedCategories,

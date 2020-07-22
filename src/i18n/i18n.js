@@ -37,12 +37,12 @@ i18n
         if (key === '_t') return;
 
         const data = [{
-          term: key,
+          term: key
         }];
         const payload = {
           api_token: token,
           data: JSON.stringify(data),
-          id,
+          id
         };
 
         return payload;
@@ -51,15 +51,15 @@ i18n
         const payload = {
           api_token: token,
           language: lng,
-          id,
+          id
         };
 
         return payload;
-      },
+      }
     },
 
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false
     }
   });
 

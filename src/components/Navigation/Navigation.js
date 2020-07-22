@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'components';
 
-function Navigation({ items = [], RightElement }) {
+const Navigation = ({ items = [], RightElement }) => {
   const { t } = useTranslation();
 
   return (
@@ -21,7 +21,7 @@ function Navigation({ items = [], RightElement }) {
       </NavigationWrapper>
     </Container>
   );
-}
+};
 
 Navigation.propTypes = {
   items: PropTypes.array.isRequired,

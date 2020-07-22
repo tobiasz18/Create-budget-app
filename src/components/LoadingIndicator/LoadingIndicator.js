@@ -32,13 +32,13 @@ const Content = styled.div`
   animation: ${flip} 2.4s cubic-bezier(0, 0.2, 0.8, 1); 
 `;
 
-function LoadingIndicator() {
+const LoadingIndicator = () => {
   return (
     <Root>
       <Content>
       </Content>
     </Root>
   );
-}
+};
 
 export default LoadingIndicator;
