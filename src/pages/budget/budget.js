@@ -9,10 +9,12 @@ import PropTypes from 'prop-types';
 import BudgetTransactionList from 'pages/budget/components/BudgetTransactionList';
 import { Switch, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import AddTransactionForm from './components/AddTransactionForm';
 
 const Budget = ({
   commonState, budgetState,
-  fetchBudget, fetchBudgetCategories, fetchAllCategories
+	fetchBudget, fetchBudgetCategories, fetchAllCategories,
+	allCategories
 }) => {
 
   useEffect(() => {
@@ -51,7 +53,12 @@ const Budget = ({
       </Grid>
       <Switch>
         <Route path="/budget/transactions/new">
-          <Modal>Add new transaction</Modal>
+          <Modal>Add new transaction
+						<AddTransactionForm 
+							categories={allCategories}
+							groupCategoriesBy="parentCategory.name"
+						/>
+					</Modal>
         </Route>
       </Switch>
     </Fragment>
@@ -61,6 +68,7 @@ const Budget = ({
 Budget.propTypes = {
   commonState: PropTypes.object,
   budgetState: PropTypes.object,
+  allCategories: PropTypes.array,
   fetchBudget: PropTypes.func,
   fetchBudgetCategories: PropTypes.func,
   fetchAllCategories: PropTypes.func
@@ -70,7 +78,8 @@ export default connect(state => {
   return {
     budget: state.budget.budget,
     commonState: state.common.loadingState,
-    budgetState: state.budget.loadingState
+		budgetState: state.budget.loadingState,
+		allCategories: state.common.allCategories,
   };
 }, { fetchBudget, fetchBudgetCategories, fetchAllCategories })(Budget);
 
